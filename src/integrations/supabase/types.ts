@@ -14,16 +14,285 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_analysis: {
+        Row: {
+          confidence: number
+          created_at: string
+          detected_category: string
+          duplicate_probability: number
+          explanation: string
+          id: string
+          issue_id: string
+          recommended_department: string | null
+          severity: Database["public"]["Enums"]["issue_priority"]
+          summary: string | null
+        }
+        Insert: {
+          confidence?: number
+          created_at?: string
+          detected_category?: string
+          duplicate_probability?: number
+          explanation?: string
+          id?: string
+          issue_id: string
+          recommended_department?: string | null
+          severity?: Database["public"]["Enums"]["issue_priority"]
+          summary?: string | null
+        }
+        Update: {
+          confidence?: number
+          created_at?: string
+          detected_category?: string
+          duplicate_probability?: number
+          explanation?: string
+          id?: string
+          issue_id?: string
+          recommended_department?: string | null
+          severity?: Database["public"]["Enums"]["issue_priority"]
+          summary?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_analysis_issue_id_fkey"
+            columns: ["issue_id"]
+            isOneToOne: false
+            referencedRelation: "issues"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      departments: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      duplicate_links: {
+        Row: {
+          created_at: string
+          id: string
+          issue_id: string
+          related_issue_id: string
+          similarity_score: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          issue_id: string
+          related_issue_id: string
+          similarity_score?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          issue_id?: string
+          related_issue_id?: string
+          similarity_score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "duplicate_links_issue_id_fkey"
+            columns: ["issue_id"]
+            isOneToOne: false
+            referencedRelation: "issues"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "duplicate_links_related_issue_id_fkey"
+            columns: ["related_issue_id"]
+            isOneToOne: false
+            referencedRelation: "issues"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      issue_updates: {
+        Row: {
+          created_at: string
+          id: string
+          issue_id: string
+          message: string
+          status: Database["public"]["Enums"]["issue_status"] | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          issue_id: string
+          message?: string
+          status?: Database["public"]["Enums"]["issue_status"] | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          issue_id?: string
+          message?: string
+          status?: Database["public"]["Enums"]["issue_status"] | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "issue_updates_issue_id_fkey"
+            columns: ["issue_id"]
+            isOneToOne: false
+            referencedRelation: "issues"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      issues: {
+        Row: {
+          address: string | null
+          ai_confidence: number | null
+          assigned_officer: string | null
+          category: string
+          complaint_number: string
+          created_at: string
+          department_id: string | null
+          description: string
+          id: string
+          image_url: string | null
+          latitude: number | null
+          longitude: number | null
+          priority: Database["public"]["Enums"]["issue_priority"]
+          status: Database["public"]["Enums"]["issue_status"]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address?: string | null
+          ai_confidence?: number | null
+          assigned_officer?: string | null
+          category?: string
+          complaint_number?: string
+          created_at?: string
+          department_id?: string | null
+          description: string
+          id?: string
+          image_url?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          priority?: Database["public"]["Enums"]["issue_priority"]
+          status?: Database["public"]["Enums"]["issue_status"]
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string | null
+          ai_confidence?: number | null
+          assigned_officer?: string | null
+          category?: string
+          complaint_number?: string
+          created_at?: string
+          department_id?: string | null
+          description?: string
+          id?: string
+          image_url?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          priority?: Database["public"]["Enums"]["issue_priority"]
+          status?: Database["public"]["Enums"]["issue_status"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "issues_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string | null
+          ward: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string
+          id: string
+          name?: string
+          phone?: string | null
+          ward?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          ward?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "citizen" | "admin"
+      issue_priority: "low" | "medium" | "high" | "critical"
+      issue_status:
+        | "reported"
+        | "ai_analyzed"
+        | "assigned"
+        | "in_progress"
+        | "resolved"
+        | "verified"
+        | "reopened"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +419,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["citizen", "admin"],
+      issue_priority: ["low", "medium", "high", "critical"],
+      issue_status: [
+        "reported",
+        "ai_analyzed",
+        "assigned",
+        "in_progress",
+        "resolved",
+        "verified",
+        "reopened",
+      ],
+    },
   },
 } as const
