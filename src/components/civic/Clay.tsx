@@ -35,9 +35,9 @@ export function ClayStat({
 }: {
   label: string;
   value: ReactNode;
-  hint?: string;
-  icon?: ReactNode;
-  tone?: "default" | "accent" | "success" | "critical";
+  hint?: string | undefined;
+  icon?: ReactNode | undefined;
+  tone?: "default" | "accent" | "success" | "critical" | undefined;
 }) {
   const toneRing =
     tone === "accent"

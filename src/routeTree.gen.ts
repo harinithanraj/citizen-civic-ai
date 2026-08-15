@@ -12,8 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as CitizenDashboardRouteImport } from './routes/citizen.dashboard'
 import { Route as CitizenMapRouteImport } from './routes/citizen.map'
+import { Route as CitizenProfileRouteImport } from './routes/citizen.profile'
 import { Route as CitizenReportRouteImport } from './routes/citizen.report'
 import { Route as CitizenIssuesIndexRouteImport } from './routes/citizen.issues.index'
 import { Route as CitizenIssuesIdRouteImport } from './routes/citizen.issues.$id'
@@ -33,6 +35,11 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CitizenDashboardRoute = CitizenDashboardRouteImport.update({
   id: '/citizen/dashboard',
   path: '/citizen/dashboard',
@@ -41,6 +48,11 @@ const CitizenDashboardRoute = CitizenDashboardRouteImport.update({
 const CitizenMapRoute = CitizenMapRouteImport.update({
   id: '/citizen/map',
   path: '/citizen/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CitizenProfileRoute = CitizenProfileRouteImport.update({
+  id: '/citizen/profile',
+  path: '/citizen/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CitizenReportRoute = CitizenReportRouteImport.update({
@@ -63,8 +75,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
   '/citizen/map': typeof CitizenMapRoute
+  '/citizen/profile': typeof CitizenProfileRoute
   '/citizen/report': typeof CitizenReportRoute
   '/citizen/issues/$id': typeof CitizenIssuesIdRoute
   '/citizen/issues/': typeof CitizenIssuesIndexRoute
@@ -73,8 +87,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
   '/citizen/map': typeof CitizenMapRoute
+  '/citizen/profile': typeof CitizenProfileRoute
   '/citizen/report': typeof CitizenReportRoute
   '/citizen/issues/$id': typeof CitizenIssuesIdRoute
   '/citizen/issues': typeof CitizenIssuesIndexRoute
@@ -84,8 +100,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
   '/citizen/map': typeof CitizenMapRoute
+  '/citizen/profile': typeof CitizenProfileRoute
   '/citizen/report': typeof CitizenReportRoute
   '/citizen/issues/$id': typeof CitizenIssuesIdRoute
   '/citizen/issues/': typeof CitizenIssuesIndexRoute
@@ -96,8 +114,10 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/register'
+    | '/admin/dashboard'
     | '/citizen/dashboard'
     | '/citizen/map'
+    | '/citizen/profile'
     | '/citizen/report'
     | '/citizen/issues/$id'
     | '/citizen/issues/'
@@ -106,8 +126,10 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/register'
+    | '/admin/dashboard'
     | '/citizen/dashboard'
     | '/citizen/map'
+    | '/citizen/profile'
     | '/citizen/report'
     | '/citizen/issues/$id'
     | '/citizen/issues'
@@ -116,8 +138,10 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/register'
+    | '/admin/dashboard'
     | '/citizen/dashboard'
     | '/citizen/map'
+    | '/citizen/profile'
     | '/citizen/report'
     | '/citizen/issues/$id'
     | '/citizen/issues/'
@@ -127,8 +151,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
   CitizenDashboardRoute: typeof CitizenDashboardRoute
   CitizenMapRoute: typeof CitizenMapRoute
+  CitizenProfileRoute: typeof CitizenProfileRoute
   CitizenReportRoute: typeof CitizenReportRoute
   CitizenIssuesIdRoute: typeof CitizenIssuesIdRoute
   CitizenIssuesIndexRoute: typeof CitizenIssuesIndexRoute
@@ -157,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/citizen/dashboard': {
       id: '/citizen/dashboard'
       path: '/citizen/dashboard'
@@ -169,6 +202,13 @@ declare module '@tanstack/react-router' {
       path: '/citizen/map'
       fullPath: '/citizen/map'
       preLoaderRoute: typeof CitizenMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/citizen/profile': {
+      id: '/citizen/profile'
+      path: '/citizen/profile'
+      fullPath: '/citizen/profile'
+      preLoaderRoute: typeof CitizenProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/citizen/report': {
@@ -199,8 +239,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
   CitizenDashboardRoute: CitizenDashboardRoute,
   CitizenMapRoute: CitizenMapRoute,
+  CitizenProfileRoute: CitizenProfileRoute,
   CitizenReportRoute: CitizenReportRoute,
   CitizenIssuesIdRoute: CitizenIssuesIdRoute,
   CitizenIssuesIndexRoute: CitizenIssuesIndexRoute,
