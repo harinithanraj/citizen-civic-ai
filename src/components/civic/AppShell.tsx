@@ -47,8 +47,8 @@ export function AppShell({
 }: {
   area: "citizen" | "admin";
   title: string;
-  subtitle?: string;
-  actions?: ReactNode;
+  subtitle?: string | undefined;
+  actions?: ReactNode | undefined;
   children: ReactNode;
 }) {
   const { loading, user, isAdmin, profile, signOut } = useAuth();
