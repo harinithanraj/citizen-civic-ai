@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as CitizenDashboardRouteImport } from './routes/citizen.dashboard'
+import { Route as CitizenIssuesIndexRouteImport } from './routes/citizen.issues.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +30,60 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitizenDashboardRoute = CitizenDashboardRouteImport.update({
+  id: '/citizen/dashboard',
+  path: '/citizen/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CitizenIssuesIndexRoute = CitizenIssuesIndexRouteImport.update({
+  id: '/citizen/issues/',
+  path: '/citizen/issues/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/citizen/dashboard': typeof CitizenDashboardRoute
+  '/citizen/issues/': typeof CitizenIssuesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/citizen/dashboard': typeof CitizenDashboardRoute
+  '/citizen/issues': typeof CitizenIssuesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/citizen/dashboard': typeof CitizenDashboardRoute
+  '/citizen/issues/': typeof CitizenIssuesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register'
+  fullPaths:
+    '/' | '/login' | '/register' | '/citizen/dashboard' | '/citizen/issues/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register'
-  id: '__root__' | '/' | '/login' | '/register'
+  to: '/' | '/login' | '/register' | '/citizen/dashboard' | '/citizen/issues'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/register'
+    | '/citizen/dashboard'
+    | '/citizen/issues/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  CitizenDashboardRoute: typeof CitizenDashboardRoute
+  CitizenIssuesIndexRoute: typeof CitizenIssuesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +109,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/citizen/dashboard': {
+      id: '/citizen/dashboard'
+      path: '/citizen/dashboard'
+      fullPath: '/citizen/dashboard'
+      preLoaderRoute: typeof CitizenDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/citizen/issues/': {
+      id: '/citizen/issues/'
+      path: '/citizen/issues'
+      fullPath: '/citizen/issues/'
+      preLoaderRoute: typeof CitizenIssuesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +130,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  CitizenDashboardRoute: CitizenDashboardRoute,
+  CitizenIssuesIndexRoute: CitizenIssuesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
