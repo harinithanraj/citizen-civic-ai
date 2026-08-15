@@ -13,8 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as CitizenDashboardRouteImport } from './routes/citizen.dashboard'
+import { Route as CitizenMapRouteImport } from './routes/citizen.map'
 import { Route as CitizenReportRouteImport } from './routes/citizen.report'
 import { Route as CitizenIssuesIndexRouteImport } from './routes/citizen.issues.index'
+import { Route as CitizenIssuesIdRouteImport } from './routes/citizen.issues.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,6 +38,11 @@ const CitizenDashboardRoute = CitizenDashboardRouteImport.update({
   path: '/citizen/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitizenMapRoute = CitizenMapRouteImport.update({
+  id: '/citizen/map',
+  path: '/citizen/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CitizenReportRoute = CitizenReportRouteImport.update({
   id: '/citizen/report',
   path: '/citizen/report',
@@ -46,13 +53,20 @@ const CitizenIssuesIndexRoute = CitizenIssuesIndexRouteImport.update({
   path: '/citizen/issues/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitizenIssuesIdRoute = CitizenIssuesIdRouteImport.update({
+  id: '/citizen/issues/$id',
+  path: '/citizen/issues/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
+  '/citizen/map': typeof CitizenMapRoute
   '/citizen/report': typeof CitizenReportRoute
+  '/citizen/issues/$id': typeof CitizenIssuesIdRoute
   '/citizen/issues/': typeof CitizenIssuesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,7 +74,9 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
+  '/citizen/map': typeof CitizenMapRoute
   '/citizen/report': typeof CitizenReportRoute
+  '/citizen/issues/$id': typeof CitizenIssuesIdRoute
   '/citizen/issues': typeof CitizenIssuesIndexRoute
 }
 export interface FileRoutesById {
@@ -69,7 +85,9 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
+  '/citizen/map': typeof CitizenMapRoute
   '/citizen/report': typeof CitizenReportRoute
+  '/citizen/issues/$id': typeof CitizenIssuesIdRoute
   '/citizen/issues/': typeof CitizenIssuesIndexRoute
 }
 export interface FileRouteTypes {
@@ -79,7 +97,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/citizen/dashboard'
+    | '/citizen/map'
     | '/citizen/report'
+    | '/citizen/issues/$id'
     | '/citizen/issues/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -87,7 +107,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/citizen/dashboard'
+    | '/citizen/map'
     | '/citizen/report'
+    | '/citizen/issues/$id'
     | '/citizen/issues'
   id:
     | '__root__'
@@ -95,7 +117,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/citizen/dashboard'
+    | '/citizen/map'
     | '/citizen/report'
+    | '/citizen/issues/$id'
     | '/citizen/issues/'
   fileRoutesById: FileRoutesById
 }
@@ -104,7 +128,9 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
   CitizenDashboardRoute: typeof CitizenDashboardRoute
+  CitizenMapRoute: typeof CitizenMapRoute
   CitizenReportRoute: typeof CitizenReportRoute
+  CitizenIssuesIdRoute: typeof CitizenIssuesIdRoute
   CitizenIssuesIndexRoute: typeof CitizenIssuesIndexRoute
 }
 
@@ -138,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CitizenDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/citizen/map': {
+      id: '/citizen/map'
+      path: '/citizen/map'
+      fullPath: '/citizen/map'
+      preLoaderRoute: typeof CitizenMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/citizen/report': {
       id: '/citizen/report'
       path: '/citizen/report'
@@ -152,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CitizenIssuesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/citizen/issues/$id': {
+      id: '/citizen/issues/$id'
+      path: '/citizen/issues/$id'
+      fullPath: '/citizen/issues/$id'
+      preLoaderRoute: typeof CitizenIssuesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -160,7 +200,9 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
   CitizenDashboardRoute: CitizenDashboardRoute,
+  CitizenMapRoute: CitizenMapRoute,
   CitizenReportRoute: CitizenReportRoute,
+  CitizenIssuesIdRoute: CitizenIssuesIdRoute,
   CitizenIssuesIndexRoute: CitizenIssuesIndexRoute,
 }
 export const routeTree = rootRouteImport

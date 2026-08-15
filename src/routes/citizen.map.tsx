@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AppShell } from "@/components/civic/AppShell";
 import { MapPanel } from "@/components/civic/MapPanel";
 import { useAuth } from "@/hooks/useAuth";
-import { DEFAULT_CENTER, PRIORITY_LABEL, type Priority } from "@/lib/civic";
+import { DEFAULT_CENTER, PRIORITY_HEX, PRIORITY_LABEL, type Priority } from "@/lib/civic";
 import { issuesQuery } from "@/lib/issues";
 
 export const Route = createFileRoute("/citizen/map")({
@@ -56,7 +56,7 @@ function CitizenMap() {
             <span
               aria-hidden
               className="size-3 rounded-full"
-              style={{ backgroundColor: `var(--legend-${p})` }}
+              style={{ backgroundColor: PRIORITY_HEX[p] }}
             />
             {PRIORITY_LABEL[p]}
           </li>
