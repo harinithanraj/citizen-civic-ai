@@ -186,7 +186,11 @@ function AdminIssueDetail() {
                 <Select
                   value={issue.status}
                   onValueChange={(v) =>
-                    void apply({ status: v }, `Status changed to ${STATUS_LABEL[v as Status]}.`, v as Status)
+                    void apply(
+                      { status: v as Status },
+                      `Status changed to ${STATUS_LABEL[v as Status]}.`,
+                      v as Status,
+                    )
                   }
                 >
                   <SelectTrigger id="status" className="clay-inset h-12 border-0">
@@ -206,7 +210,10 @@ function AdminIssueDetail() {
                 <Select
                   value={issue.priority}
                   onValueChange={(v) =>
-                    void apply({ priority: v }, `Priority set to ${PRIORITY_LABEL[v as Priority]}.`)
+                    void apply(
+                      { priority: v as Priority },
+                      `Priority set to ${PRIORITY_LABEL[v as Priority]}.`,
+                    )
                   }
                 >
                   <SelectTrigger id="priority" className="clay-inset h-12 border-0">
