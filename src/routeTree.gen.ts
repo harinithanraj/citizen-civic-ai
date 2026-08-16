@@ -14,7 +14,9 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminDepartmentsRouteImport } from './routes/admin.departments'
 import { Route as AdminMapRouteImport } from './routes/admin.map'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as CitizenDashboardRouteImport } from './routes/citizen.dashboard'
 import { Route as CitizenMapRouteImport } from './routes/citizen.map'
 import { Route as CitizenProfileRouteImport } from './routes/citizen.profile'
@@ -49,9 +51,19 @@ const AdminDashboardRoute = AdminDashboardRouteImport.update({
   path: '/admin/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDepartmentsRoute = AdminDepartmentsRouteImport.update({
+  id: '/admin/departments',
+  path: '/admin/departments',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminMapRoute = AdminMapRouteImport.update({
   id: '/admin/map',
   path: '/admin/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CitizenDashboardRoute = CitizenDashboardRouteImport.update({
@@ -101,7 +113,9 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/departments': typeof AdminDepartmentsRoute
   '/admin/map': typeof AdminMapRoute
+  '/admin/users': typeof AdminUsersRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
   '/citizen/map': typeof CitizenMapRoute
   '/citizen/profile': typeof CitizenProfileRoute
@@ -117,7 +131,9 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/departments': typeof AdminDepartmentsRoute
   '/admin/map': typeof AdminMapRoute
+  '/admin/users': typeof AdminUsersRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
   '/citizen/map': typeof CitizenMapRoute
   '/citizen/profile': typeof CitizenProfileRoute
@@ -134,7 +150,9 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/departments': typeof AdminDepartmentsRoute
   '/admin/map': typeof AdminMapRoute
+  '/admin/users': typeof AdminUsersRoute
   '/citizen/dashboard': typeof CitizenDashboardRoute
   '/citizen/map': typeof CitizenMapRoute
   '/citizen/profile': typeof CitizenProfileRoute
@@ -152,7 +170,9 @@ export interface FileRouteTypes {
     | '/register'
     | '/admin/analytics'
     | '/admin/dashboard'
+    | '/admin/departments'
     | '/admin/map'
+    | '/admin/users'
     | '/citizen/dashboard'
     | '/citizen/map'
     | '/citizen/profile'
@@ -168,7 +188,9 @@ export interface FileRouteTypes {
     | '/register'
     | '/admin/analytics'
     | '/admin/dashboard'
+    | '/admin/departments'
     | '/admin/map'
+    | '/admin/users'
     | '/citizen/dashboard'
     | '/citizen/map'
     | '/citizen/profile'
@@ -184,7 +206,9 @@ export interface FileRouteTypes {
     | '/register'
     | '/admin/analytics'
     | '/admin/dashboard'
+    | '/admin/departments'
     | '/admin/map'
+    | '/admin/users'
     | '/citizen/dashboard'
     | '/citizen/map'
     | '/citizen/profile'
@@ -201,7 +225,9 @@ export interface RootRouteChildren {
   RegisterRoute: typeof RegisterRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminDepartmentsRoute: typeof AdminDepartmentsRoute
   AdminMapRoute: typeof AdminMapRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   CitizenDashboardRoute: typeof CitizenDashboardRoute
   CitizenMapRoute: typeof CitizenMapRoute
   CitizenProfileRoute: typeof CitizenProfileRoute
@@ -249,11 +275,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/departments': {
+      id: '/admin/departments'
+      path: '/admin/departments'
+      fullPath: '/admin/departments'
+      preLoaderRoute: typeof AdminDepartmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/map': {
       id: '/admin/map'
       path: '/admin/map'
       fullPath: '/admin/map'
       preLoaderRoute: typeof AdminMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/citizen/dashboard': {
@@ -321,7 +361,9 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterRoute: RegisterRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminDepartmentsRoute: AdminDepartmentsRoute,
   AdminMapRoute: AdminMapRoute,
+  AdminUsersRoute: AdminUsersRoute,
   CitizenDashboardRoute: CitizenDashboardRoute,
   CitizenMapRoute: CitizenMapRoute,
   CitizenProfileRoute: CitizenProfileRoute,
