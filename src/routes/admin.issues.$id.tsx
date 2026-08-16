@@ -30,7 +30,10 @@ import {
   type Priority,
   type Status,
 } from "@/lib/civic";
+import type { Database } from "@/integrations/supabase/types";
 import { departmentsQuery, issueDetailQuery, relativeTime } from "@/lib/issues";
+
+type IssuePatch = Database["public"]["Tables"]["issues"]["Update"];
 
 export const Route = createFileRoute("/admin/issues/$id")({
   head: () => ({
@@ -56,7 +59,7 @@ function AdminIssueDetail() {
 
   const issue = data?.issue;
 
-  async function apply(patch: Record<string, unknown>, note: string, status?: Status) {
+  async function apply(patch: IssuePatch, note: string, status?: Status) {
     if (!issue || !user) return;
     setPending(true);
     const { error } = await supabase.from("issues").update(patch).eq("id", issue.id);
