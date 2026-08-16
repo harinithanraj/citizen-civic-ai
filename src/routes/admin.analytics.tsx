@@ -29,7 +29,7 @@ export const Route = createFileRoute("/admin/analytics")({
       { property: "og:description", content: "Understand where civic issues concentrate and how fast they close." },
     ],
   }),
-  component: Analytics;
+  component: Analytics,
 });
 
 function Analytics() {
