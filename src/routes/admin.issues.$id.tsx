@@ -30,7 +30,10 @@ import {
   type Priority,
   type Status,
 } from "@/lib/civic";
+import type { Database } from "@/integrations/supabase/types";
 import { departmentsQuery, issueDetailQuery, relativeTime } from "@/lib/issues";
+
+type IssuePatch = Database["public"]["Tables"]["issues"]["Update"];
 
 export const Route = createFileRoute("/admin/issues/$id")({
   head: () => ({
@@ -56,7 +59,7 @@ function AdminIssueDetail() {
 
   const issue = data?.issue;
 
-  async function apply(patch: Record<string, unknown>, note: string, status?: Status) {
+  async function apply(patch: IssuePatch, note: string, status?: Status) {
     if (!issue || !user) return;
     setPending(true);
     const { error } = await supabase.from("issues").update(patch).eq("id", issue.id);
@@ -183,7 +186,11 @@ function AdminIssueDetail() {
                 <Select
                   value={issue.status}
                   onValueChange={(v) =>
-                    void apply({ status: v }, `Status changed to ${STATUS_LABEL[v as Status]}.`, v as Status)
+                    void apply(
+                      { status: v as Status },
+                      `Status changed to ${STATUS_LABEL[v as Status]}.`,
+                      v as Status,
+                    )
                   }
                 >
                   <SelectTrigger id="status" className="clay-inset h-12 border-0">
@@ -203,7 +210,10 @@ function AdminIssueDetail() {
                 <Select
                   value={issue.priority}
                   onValueChange={(v) =>
-                    void apply({ priority: v }, `Priority set to ${PRIORITY_LABEL[v as Priority]}.`)
+                    void apply(
+                      { priority: v as Priority },
+                      `Priority set to ${PRIORITY_LABEL[v as Priority]}.`,
+                    )
                   }
                 >
                   <SelectTrigger id="priority" className="clay-inset h-12 border-0">
