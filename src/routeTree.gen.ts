@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnalyticsDemoRouteImport } from './routes/analytics-demo'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
@@ -29,6 +30,11 @@ import { Route as CitizenIssuesIdRouteImport } from './routes/citizen.issues.$id
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsDemoRoute = AnalyticsDemoRouteImport.update({
+  id: '/analytics-demo',
+  path: '/analytics-demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -109,6 +115,7 @@ const CitizenIssuesIdRoute = CitizenIssuesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics-demo': typeof AnalyticsDemoRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics-demo': typeof AnalyticsDemoRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -146,6 +154,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analytics-demo': typeof AnalyticsDemoRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/analytics-demo'
     | '/login'
     | '/register'
     | '/admin/analytics'
@@ -184,6 +194,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/analytics-demo'
     | '/login'
     | '/register'
     | '/admin/analytics'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/analytics-demo'
     | '/login'
     | '/register'
     | '/admin/analytics'
@@ -221,6 +233,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalyticsDemoRoute: typeof AnalyticsDemoRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics-demo': {
+      id: '/analytics-demo'
+      path: '/analytics-demo'
+      fullPath: '/analytics-demo'
+      preLoaderRoute: typeof AnalyticsDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -357,6 +377,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalyticsDemoRoute: AnalyticsDemoRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
