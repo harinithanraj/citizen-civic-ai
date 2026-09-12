@@ -161,11 +161,13 @@ export const setUserRole = createServerFn({ method: "POST" })
     z.object({ userId: z.string().uuid(), makeAdmin: z.boolean() }).parse(input),
   )
   .handler(async ({ data, context }): Promise<{ ok: boolean; reason?: string }> => {
-    const { data: isAdmin } = await context.supabase.rpc("has_role", {
-      _user_id: context.userId,
-      _role: "admin",
-    });
-    if (!isAdmin) return { ok: false, reason: "Forbidden" };
+    const { data: adminRow } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId)
+      .eq("role", "admin")
+      .maybeSingle();
+    if (!adminRow) return { ok: false, reason: "Forbidden" };
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     if (data.makeAdmin) {
       const { error } = await supabaseAdmin
