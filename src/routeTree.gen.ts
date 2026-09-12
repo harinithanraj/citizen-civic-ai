@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalyticsDemoRouteImport } from './routes/analytics-demo'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminDepartmentsRouteImport } from './routes/admin.departments'
@@ -45,6 +46,11 @@ const LoginRoute = LoginRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/analytics-demo': typeof AnalyticsDemoRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/departments': typeof AdminDepartmentsRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/analytics-demo': typeof AnalyticsDemoRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/departments': typeof AdminDepartmentsRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/analytics-demo': typeof AnalyticsDemoRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/departments': typeof AdminDepartmentsRoute
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/analytics-demo'
     | '/login'
     | '/register'
+    | '/sitemap.xml'
     | '/admin/analytics'
     | '/admin/dashboard'
     | '/admin/departments'
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/analytics-demo'
     | '/login'
     | '/register'
+    | '/sitemap.xml'
     | '/admin/analytics'
     | '/admin/dashboard'
     | '/admin/departments'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/analytics-demo'
     | '/login'
     | '/register'
+    | '/sitemap.xml'
     | '/admin/analytics'
     | '/admin/dashboard'
     | '/admin/departments'
@@ -236,6 +248,7 @@ export interface RootRouteChildren {
   AnalyticsDemoRoute: typeof AnalyticsDemoRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminDepartmentsRoute: typeof AdminDepartmentsRoute
@@ -279,6 +292,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/analytics': {
@@ -380,6 +400,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnalyticsDemoRoute: AnalyticsDemoRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminDepartmentsRoute: AdminDepartmentsRoute,
