@@ -32,10 +32,10 @@ function LoginPage() {
   const [pending, setPending] = useState(false);
 
   useEffect(() => {
-    if (loading || !user) return;
+    if (loading || !user || role === null) return;
     const target = next && next.startsWith("/") ? next : isAdmin ? "/admin/dashboard" : "/citizen/dashboard";
     void navigate({ to: target, replace: true });
-  }, [loading, user, isAdmin, next, navigate]);
+  }, [loading, user, isAdmin, role, next, navigate]);
 
   async function signInWith(demoEmail: string, demoPassword: string) {
     setEmail(demoEmail);
