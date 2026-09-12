@@ -17,6 +17,7 @@ import { CATEGORIES, PRIORITIES, PRIORITY_LABEL, STATUSES, STATUS_LABEL } from "
 import { issuesQuery } from "@/lib/issues";
 
 export const Route = createFileRoute("/admin/issues/")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Complaint queue — CivicConnect AI" },

@@ -36,6 +36,7 @@ import { departmentsQuery, issueDetailQuery, relativeTime } from "@/lib/issues";
 type IssuePatch = Database["public"]["Tables"]["issues"]["Update"];
 
 export const Route = createFileRoute("/admin/issues/$id")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Manage complaint — CivicConnect AI" },

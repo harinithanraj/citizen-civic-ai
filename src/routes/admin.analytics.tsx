@@ -21,6 +21,7 @@ import { PRIORITY_HEX, STATUS_LABEL, type Priority, type Status } from "@/lib/ci
 import { countBy, issuesQuery, summarise } from "@/lib/issues";
 
 export const Route = createFileRoute("/admin/analytics")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Civic analytics — CivicConnect AI" },

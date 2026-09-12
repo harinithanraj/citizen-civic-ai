@@ -12,6 +12,7 @@ import { greeting } from "@/lib/civic";
 import { issuesQuery, summarise } from "@/lib/issues";
 
 export const Route = createFileRoute("/citizen/dashboard")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Citizen dashboard — CivicConnect AI" },
@@ -32,7 +33,7 @@ function CitizenDashboard() {
   return (
     <AppShell
       area="citizen"
-      title={`${greeting()}, ${firstName}`}
+      title={`Citizen dashboard — ${greeting()}, ${firstName}`}
       subtitle="Here's what's happening with the issues you've reported."
       actions={
         <Button asChild size="lg" className="rounded-2xl">

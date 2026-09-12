@@ -45,6 +45,7 @@ import { blobToDataUrl, compressImage } from "@/lib/image";
 import { departmentsQuery, issuesQuery, type IssueRow } from "@/lib/issues";
 
 export const Route = createFileRoute("/citizen/report")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Report a civic issue — CivicConnect AI" },

@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { departmentsQuery, issuesQuery } from "@/lib/issues";
 
 export const Route = createFileRoute("/admin/departments")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Departments — CivicConnect AI" },

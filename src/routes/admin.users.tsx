@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { setUserRole } from "@/lib/ai.functions";
 
 export const Route = createFileRoute("/admin/users")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Users & roles — CivicConnect AI" },

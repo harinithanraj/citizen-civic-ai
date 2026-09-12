@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/login")({
+  staticData: { sitemap: true },
   validateSearch: z.object({ next: z.string().optional() }),
   head: () => ({
     meta: [
@@ -80,7 +81,7 @@ function LoginPage() {
     <main className="grid min-h-screen place-items-center px-4 py-12">
       <div className="clay-lg w-full max-w-md p-8">
         <Logo />
-        <h1 className="mt-8 font-display text-3xl font-bold">Welcome back</h1>
+        <h1 className="mt-8 font-display text-3xl font-bold">Sign in to CivicConnect AI</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Sign in to report issues and follow every status update.
         </p>

@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/register")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Create your citizen account — CivicConnect AI" },

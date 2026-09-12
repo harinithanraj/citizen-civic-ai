@@ -17,6 +17,7 @@ import { issueDetailQuery, relativeTime } from "@/lib/issues";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/citizen/issues/$id")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Complaint details — CivicConnect AI" },

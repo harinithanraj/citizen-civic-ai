@@ -9,6 +9,7 @@ import { DEFAULT_CENTER, PRIORITY_HEX, PRIORITY_LABEL, type Priority } from "@/l
 import { issuesQuery } from "@/lib/issues";
 
 export const Route = createFileRoute("/admin/map")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "City complaint map — CivicConnect AI" },
