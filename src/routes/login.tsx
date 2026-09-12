@@ -26,16 +26,32 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const { next } = Route.useSearch();
   const navigate = useNavigate();
-  const { user, isAdmin, loading } = useAuth();
+  const { user, isAdmin, role, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pending, setPending] = useState(false);
 
   useEffect(() => {
-    if (loading || !user) return;
+    if (loading || !user || role === null) return;
     const target = next && next.startsWith("/") ? next : isAdmin ? "/admin/dashboard" : "/citizen/dashboard";
     void navigate({ to: target, replace: true });
-  }, [loading, user, isAdmin, next, navigate]);
+  }, [loading, user, isAdmin, role, next, navigate]);
+
+  async function signInWith(demoEmail: string, demoPassword: string) {
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+    setPending(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: demoEmail,
+      password: demoPassword,
+    });
+    setPending(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Signed in with the demo account.");
+  }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -100,6 +116,36 @@ function LoginPage() {
             {pending ? "Signing in…" : "Sign in"}
           </Button>
         </form>
+
+        <div className="clay-inset mt-6 space-y-3 p-4">
+          <p className="text-xs font-semibold tracking-[0.16em] text-subtle-foreground uppercase">
+            Try a demo account
+          </p>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Button
+              type="button"
+              variant="secondary"
+              className="flex-1 rounded-2xl"
+              disabled={pending}
+              onClick={() => void signInWith("citizen@civicconnect.demo", "Demo1234!")}
+            >
+              Citizen demo
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              className="flex-1 rounded-2xl"
+              disabled={pending}
+              onClick={() => void signInWith("admin@civicconnect.demo", "Demo1234!")}
+            >
+              Admin demo
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            citizen@civicconnect.demo / admin@civicconnect.demo — password Demo1234!
+          </p>
+        </div>
+
 
         <p className="mt-6 text-sm text-muted-foreground">
           New here?{" "}
