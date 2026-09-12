@@ -26,7 +26,7 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const { next } = Route.useSearch();
   const navigate = useNavigate();
-  const { user, isAdmin, loading } = useAuth();
+  const { user, isAdmin, role, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pending, setPending] = useState(false);
