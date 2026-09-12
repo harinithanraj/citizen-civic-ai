@@ -37,6 +37,22 @@ function LoginPage() {
     void navigate({ to: target, replace: true });
   }, [loading, user, isAdmin, next, navigate]);
 
+  async function signInWith(demoEmail: string, demoPassword: string) {
+    setEmail(demoEmail);
+    setPassword(demoPassword);
+    setPending(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: demoEmail,
+      password: demoPassword,
+    });
+    setPending(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Signed in with the demo account.");
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const parsed = z
