@@ -117,6 +117,36 @@ function LoginPage() {
           </Button>
         </form>
 
+        <div className="clay-inset mt-6 space-y-3 p-4">
+          <p className="text-xs font-semibold tracking-[0.16em] text-subtle-foreground uppercase">
+            Try a demo account
+          </p>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Button
+              type="button"
+              variant="secondary"
+              className="flex-1 rounded-2xl"
+              disabled={pending}
+              onClick={() => void signInWith("citizen@civicconnect.demo", "Demo1234!")}
+            >
+              Citizen demo
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              className="flex-1 rounded-2xl"
+              disabled={pending}
+              onClick={() => void signInWith("admin@civicconnect.demo", "Demo1234!")}
+            >
+              Admin demo
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            citizen@civicconnect.demo / admin@civicconnect.demo — password Demo1234!
+          </p>
+        </div>
+
+
         <p className="mt-6 text-sm text-muted-foreground">
           New here?{" "}
           <Link to="/register" className="font-semibold text-primary underline-offset-4 hover:underline">
