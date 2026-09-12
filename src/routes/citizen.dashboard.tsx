@@ -12,6 +12,7 @@ import { greeting } from "@/lib/civic";
 import { issuesQuery, summarise } from "@/lib/issues";
 
 export const Route = createFileRoute("/citizen/dashboard")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Citizen dashboard — CivicConnect AI" },

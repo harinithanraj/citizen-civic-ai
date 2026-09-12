@@ -18,6 +18,7 @@ import { STATUSES, STATUS_LABEL } from "@/lib/civic";
 import { issuesQuery } from "@/lib/issues";
 
 export const Route = createFileRoute("/citizen/issues/")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "My complaints — CivicConnect AI" },

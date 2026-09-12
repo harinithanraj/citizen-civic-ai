@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { claimFirstAdmin } from "@/lib/ai.functions";
 
 export const Route = createFileRoute("/citizen/profile")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "My profile — CivicConnect AI" },

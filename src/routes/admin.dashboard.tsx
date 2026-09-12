@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { countBy, issuesQuery, summarise } from "@/lib/issues";
 
 export const Route = createFileRoute("/admin/dashboard")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Operations overview — CivicConnect AI" },

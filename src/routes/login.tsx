@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/login")({
+  staticData: { sitemap: true },
   validateSearch: z.object({ next: z.string().optional() }),
   head: () => ({
     meta: [

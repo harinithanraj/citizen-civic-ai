@@ -31,6 +31,7 @@ import { buildDemoIssues, downloadCsv, toCsv, WARDS, type DemoIssue } from "@/li
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/analytics-demo")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Analytics demo — explore civic complaint trends" },

@@ -16,6 +16,7 @@ import { Logo } from "@/components/civic/Logo";
 import { useAuth } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "CivicConnect AI — Report Civic Issues, Get Them Fixed" },
