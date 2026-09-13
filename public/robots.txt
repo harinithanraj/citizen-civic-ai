@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://citizen-civic-ai.lovable.app/sitemap.xml
